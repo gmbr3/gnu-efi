@@ -52,10 +52,7 @@ endif
 
 %.efi.debug: %.so
 	@$(ECHO) "  OBJCOPY  $(notdir $@)"
-	$(HIDE)$(OBJCOPY) -j .debug_info -j .debug_abbrev -j .debug_aranges \
-		-j .debug_line -j .debug_str -j .debug_ranges \
-		-j .note.gnu.build-id \
-		$(FORMAT) $*.so $@
+	$(HIDE)$(OBJCOPY) --only-keep-debug $*.so $@
 
 %.so: %.o
 	@$(ECHO) "  LD       $(notdir $@)"
