@@ -566,7 +566,7 @@ LibGetUiString (
     // Search for the match
     //
     while (Array->LangCode) {
-        if (strcmpa (Array->LangCode, LangCode) == 0) {
+        if (AsciiStrCmp (Array->LangCode, LangCode) == 0) {
             return Array->UiString; 
         }
     }

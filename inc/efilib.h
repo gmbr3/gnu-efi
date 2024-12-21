@@ -44,6 +44,7 @@ extern "C" {
 #endif
 #include "efilink.h"
 #include "efirtlib.h"
+#include "eficstring.h"
 #include "efistdarg.h"
 #include "pci22.h"
 #include "libsmbios.h"
@@ -406,31 +407,6 @@ CHAR16 *
 StrDuplicate (
     IN CONST CHAR16   *Src
     );
-
-UINTN
-AsciiStrLen (
-    IN CONST CHAR8    *s1
-    );
-
-UINTN
-AsciiStrCmp (
-    IN CONST CHAR8    *s1,
-    IN CONST CHAR8    *s2
-    );
-
-UINTN
-AsciiStrnCmp (
-    IN CONST CHAR8    *s1,
-    IN CONST CHAR8    *s2,
-    IN UINTN          len
-    );
-
-//
-// For compatibility with previous gnu-efi versions
-//
-#define strlena AsciiStrLen
-#define strcmpa AsciiStrCmp
-#define strncmpa AsciiStrnCmp
 
 UINTN
 xtoi (
