@@ -263,7 +263,6 @@ else
 CFLAGS  += $(ARCH3264) -g -O2 -Wall -Wextra -Wno-pointer-sign -Werror \
            -fno-strict-aliasing \
            -ffreestanding -fno-stack-protector -fno-stack-check \
-           $(if $(findstring 0,$(USING_CLANG)),-Wno-error=maybe-uninitialized,) \
            $(if $(findstring 0,$(USING_CLANG)),-fno-merge-all-constants,)
 endif
 
