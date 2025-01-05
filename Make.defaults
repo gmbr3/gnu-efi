@@ -64,14 +64,19 @@ LIBDIR       := $(EXEC_PREFIX)/lib
 INCLUDEDIR   := $(PREFIX)/include
 INSTALL      := install
 
+# Cross-compilation
+CROSS_COMPILE ?= 
+HOST_MACHINE ?= 
+BUILD_MACHINE ?= $(CROSS_COMPILE)
+
 # Compilation tools
-HOSTCC       := $(prefix)gcc
-CC           := $(prefix)$(CROSS_COMPILE)gcc
-AS           := $(prefix)$(CROSS_COMPILE)as
-LD           := $(prefix)$(CROSS_COMPILE)ld
-AR           := $(prefix)$(CROSS_COMPILE)ar
-RANLIB       := $(prefix)$(CROSS_COMPILE)ranlib
-OBJCOPY      := $(prefix)$(CROSS_COMPILE)objcopy
+HOSTCC       := $(HOST_MACHINE)gcc
+CC           := $(BUILD_MACHINE)gcc
+AS           := $(BUILD_MACHINE)as
+LD           := $(BUILD_MACHINE)ld
+AR           := $(BUILD_MACHINE)ar
+RANLIB       := $(BUILD_MACHINE)ranlib
+OBJCOPY      := $(BUILD_MACHINE)objcopy
 
 # Set verbose or nonverbose output similarly to automake's silent rules.
 # Default is nonverbose, but, just like with automake, it can be disabled
@@ -91,14 +96,14 @@ USING_FREEBSD ?= $(shell echo $(OS) | grep -q 'FreeBSD' && echo 1 || echo 0)
 
 # FreeBSD uses clang with no gcc symlink
 ifeq ($(USING_FREEBSD),1)
-override HOSTCC       := $(prefix)clang
+override HOSTCC       := $(HOST_MACHINE)clang
 endif
 
 HOSTARCH      ?= $(shell $(HOSTCC) -dumpmachine | cut -f1 -d- | sed -e s,i[3456789]86,ia32, -e 's,armv[67].*,arm,' )
 ARCH          ?= $(shell $(HOSTCC) -dumpmachine | cut -f1 -d- | sed -e s,i[3456789]86,ia32, -e 's,armv[67].*,arm,' )
 
 # Get ARCH from the compiler if cross compiling 
-ifneq ($(CROSS_COMPILE),)
+ifneq ($(BUILD_MACHINE),)
   override ARCH := $(shell $(CC) -dumpmachine | cut -f1 -d-| sed -e s,i[3456789]86,ia32, -e 's,armv[67].*,arm,' )
 endif
 
