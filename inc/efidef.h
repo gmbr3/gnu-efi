@@ -94,7 +94,7 @@ typedef struct {
     UINT16  Data2;
     UINT16  Data3;
     UINT8   Data4[8]; 
-} EFI_GUID;
+} EFI_GUID EFI_ALIGN(64);
 
 
 //
