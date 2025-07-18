@@ -89,12 +89,12 @@ typedef VOID            *EFI_EVENT;
 // A GUID
 //
 
-typedef struct {          
+typedef EFI_ALIGN(64) struct {          
     UINT32  Data1;
     UINT16  Data2;
     UINT16  Data3;
     UINT8   Data4[8]; 
-} EFI_GUID EFI_ALIGN(64);
+} EFI_GUID;
 
 
 //
@@ -136,11 +136,11 @@ typedef struct {
     UINT8                   Addr[16];
 } EFI_IPv6_ADDRESS;
 
-typedef union {
+typedef EFI_ALIGN(4) union {
     UINT32      Addr[4];
     EFI_IPv4_ADDRESS    v4;
     EFI_IPv6_ADDRESS    v6;
-} EFI_IP_ADDRESS EFI_ALIGN(4);
+} EFI_IP_ADDRESS;
 
 typedef struct {
     UINT8                   Addr[32];
