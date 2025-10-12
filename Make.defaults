@@ -81,6 +81,8 @@ AR           := $(prefix)$(CROSS_COMPILE)ar
 RANLIB       := $(prefix)$(CROSS_COMPILE)ranlib
 OBJCOPY      := $(prefix)$(CROSS_COMPILE)objcopy
 
+V ?= 1
+
 # Set verbose or nonverbose output similarly to automake's silent rules.
 # Default is nonverbose, but, just like with automake, it can be disabled
 # with: 'make V=1'
@@ -275,7 +277,7 @@ EFI_CFLAGS  += $(ARCH3264) -g -O2 -Wall -Wextra -Werror \
            -fno-strict-aliasing \
            -ffreestanding -fno-stack-protector
 else
-EFI_CFLAGS  += $(ARCH3264) -g -O2 -Wall -Wextra -Werror \
+EFI_CFLAGS  += $(ARCH3264) -g -Os -Wall -Wextra -Werror \
            -fno-strict-aliasing \
            -ffreestanding -fno-stack-protector \
            $(if $(findstring 0,$(USING_CLANG)),-fno-merge-all-constants,)
